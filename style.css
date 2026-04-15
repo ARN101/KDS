@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #1a1a2e;
+    background-color: #f8f9fa;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background-color: #1a1a2e;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #e8c547;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #cfd2d6;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+nav ul li a:hover {
+    color: #e8c547;
+}
+
+.hero {
+    background-color: #16213e;
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 24px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #e8c547;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #c0c7d1;
+    font-weight: 400;
+}
+
+.about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    text-align: center;
+}
+
+.about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 24px;
+    color: #1a1a2e;
+}
+
+.about p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 16px;
+}
+
+.highlights {
+    background-color: #1a1a2e;
+    padding: 64px 24px;
+    text-align: center;
+}
+
+.highlights h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #e8c547;
+    margin-bottom: 40px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #16213e;
+    padding: 32px 24px;
+    border-radius: 8px;
+    width: 280px;
+    text-align: left;
+    border: 1px solid #2a2a4a;
+}
+
+.card h3 {
+    font-size: 20px;
+    color: #e8c547;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 15px;
+    color: #b0b8c4;
+    line-height: 1.7;
+}
+
+footer {
+    text-align: center;
+    padding: 32px 24px;
+    background-color: #0f0f23;
+    color: #888;
+    font-size: 14px;
+}
+
+footer p {
+    margin-bottom: 6px;
+}
