@@ -1,0 +1,7 @@
+# SQLite database files
+db/*.sqlite
+db/*.sqlite-journal
+
+# OS files
+.DS_Store
+Thumbs.db
