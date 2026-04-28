@@ -1,0 +1,173 @@
+/* public/assets/css/main.css */
+
+/* 1. Core Variables & Theme Defaults */
+:root {
+    --color-jet-black: #000000;
+    --color-pure-white: #FFFFFF;
+    --color-cherry-red: #ED1C24;
+    --color-brunswick-green: #006837;
+    --color-dark-grey: #0F0F0F;
+    --color-light-grey: #1C1C1C;
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Playfair Display', serif;
+}
+
+/* 2. Lenis Smooth Scroll Configuration */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overflow: clip;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* 3. Base Elements Styling */
+body {
+    background-color: var(--color-jet-black);
+    color: var(--color-pure-white);
+    font-family: var(--font-primary);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif-custom {
+    font-family: var(--font-secondary);
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-jet-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-cherry-red);
+}
+
+/* Selection Highlight */
+::selection {
+    background: var(--color-cherry-red);
+    color: var(--color-pure-white);
+}
+
+/* 4. Glassmorphism Utilities */
+.glass-panel {
+    background: rgba(15, 15, 15, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover:hover {
+    background: rgba(20, 20, 20, 0.85);
+    border-color: rgba(237, 28, 36, 0.25);
+    box-shadow: 0 10px 30px -10px rgba(237, 28, 36, 0.15);
+}
+
+/* Spotlight Effect Grid & Hover Containers */
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(237, 28, 36, 0.08), transparent 40%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.spotlight-card:hover::before {
+    opacity: 1;
+}
+
+/* Custom Cinematic Light Rays & Glowing Effects */
+.glow-text-red {
+    text-shadow: 0 0 15px rgba(237, 28, 36, 0.4);
+}
+
+.glow-text-green {
+    text-shadow: 0 0 15px rgba(0, 104, 55, 0.4);
+}
+
+.glow-border-red:hover {
+    border-color: var(--color-cherry-red);
+    box-shadow: 0 0 15px rgba(237, 28, 36, 0.25);
+}
+
+/* 5. Custom Page Transitions & Keyframe Utilities */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-jet-black);
+    z-index: 9999;
+    transform: scaleY(0);
+    transform-origin: top;
+    pointer-events: none;
+}
+
+/* Dynamic line animations */
+.animated-underline {
+    position: relative;
+}
+
+.animated-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-cherry-red);
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.animated-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Particle Container styling */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
