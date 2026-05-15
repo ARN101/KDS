@@ -90,9 +90,20 @@ CREATE TABLE IF NOT EXISTS recruitment (
     applied_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 8. Contacts Table (Feedback / Messages)
+CREATE TABLE IF NOT EXISTS contacts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Indexes for performance Optimization
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_members_status ON members(status);
 CREATE INDEX IF NOT EXISTS idx_events_date ON events(event_date);
 CREATE INDEX IF NOT EXISTS idx_debates_date ON debates(debate_date);
 CREATE INDEX IF NOT EXISTS idx_recruitment_status ON recruitment(status);
+CREATE INDEX IF NOT EXISTS idx_contacts_email ON contacts(email);

@@ -13,13 +13,18 @@ $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <!-- Col 1: Brand & Slogan -->
                 <div class="md:col-span-2">
-                    <h2 class="font-serif text-3xl font-bold tracking-tight text-white mb-4">
-                        KUET <span class="text-brandRed">Debating</span> Society
-                    </h2>
-                    <p class="font-serif italic text-gray-400 text-sm mb-6 max-w-sm">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 border border-white/10 flex items-center justify-center overflow-hidden bg-black rounded shadow-md">
+                            <img src="<?= $base_path ?>/assets/images/logo.jpg" alt="KDS Logo" class="w-full h-full object-cover">
+                        </div>
+                        <h2 class="font-serif text-3xl font-bold tracking-tight text-white">
+                            KUET <span class="text-brandRed">Debating</span> Society
+                        </h2>
+                    </div>
+                    <p class="font-serif italic text-gray-300 text-sm mb-6 max-w-sm">
                         "The Voice of Reason"
                     </p>
-                    <p class="font-sans font-light text-gray-500 text-xs leading-relaxed max-w-md">
+                    <p class="font-sans font-light text-gray-400 text-xs leading-relaxed max-w-md">
                         KDS is the center of logical debate and rhetorical excellence at Khulna University of Engineering & Technology. We nurture speakers, analysts, and leaders of tomorrow.
                     </p>
                 </div>

@@ -49,6 +49,17 @@ function is_active_route($route, $base_path) {
                         brandGreen: '#006837',
                         darkGrey: '#0F0F0F',
                         lightGrey: '#1C1C1C',
+                        gray: {
+                            100: '#F3F4F6',
+                            200: '#E5E7EB',
+                            300: '#D1D5DB',
+                            400: '#CBD5E1', // increased brightness
+                            500: '#94A3B8', // increased brightness
+                            600: '#64748B',
+                            700: '#475569',
+                            800: '#334155',
+                            900: '#1E293B',
+                        }
                     },
                     fontFamily: {
                         sans: ['Montserrat', 'sans-serif'],
@@ -83,12 +94,12 @@ function is_active_route($route, $base_path) {
             
             <!-- Logo Section -->
             <a href="<?= $base_path ?>/" class="flex items-center gap-3 group relative z-50">
-                <div class="w-10 h-10 border border-brandRed flex items-center justify-center font-serif text-brandRed font-black text-xl bg-black rounded shadow-lg shadow-brandRed/10 transition-all duration-300 group-hover:scale-105 group-hover:shadow-brandRed/30">
-                    K
+                <div class="w-10 h-10 border border-white/10 flex items-center justify-center overflow-hidden bg-black rounded shadow-lg shadow-brandRed/10 transition-all duration-300 group-hover:scale-105 group-hover:shadow-brandRed/30 group-hover:border-brandRed/50">
+                    <img src="<?= $base_path ?>/assets/images/logo.jpg" alt="KDS Logo" class="w-full h-full object-cover">
                 </div>
                 <div class="flex flex-col leading-none">
                     <span class="font-serif text-xl tracking-tight text-white font-bold group-hover:text-brandRed transition-colors duration-300">KDS</span>
-                    <span class="text-[9px] uppercase tracking-[0.25em] text-gray-500 font-sans mt-0.5">KUET DEBATING SOCIETY</span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-gray-400 font-sans mt-0.5">KUET DEBATING SOCIETY</span>
                 </div>
             </a>
 

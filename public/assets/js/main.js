@@ -85,6 +85,7 @@ function initCinematicParticles() {
             this.speedY = Math.random() * -0.4 - 0.1; // Float upwards slowly
             this.alpha = Math.random() * 0.5 + 0.2;
             this.decay = Math.random() * 0.002 + 0.001;
+            this.color = Math.random() > 0.85 ? '#ED1C24' : '#FFFFFF'; // Mix in occasional red sparks
         }
 
         update() {
@@ -104,7 +105,7 @@ function initCinematicParticles() {
         draw() {
             ctx.save();
             ctx.globalAlpha = this.alpha;
-            ctx.fillStyle = Math.random() > 0.85 ? '#ED1C24' : '#FFFFFF'; // Mix in occasional red sparks
+            ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
