@@ -7,6 +7,7 @@ secure_session_start();
 
 // 2. Load Routing Infrastructure
 require_once dirname(__DIR__) . '/src/Router.php';
+require_once dirname(__DIR__) . '/src/Middleware/AuthMiddleware.php';
 
 // 3. Initialize Router
 $router = new Router();
@@ -100,7 +101,7 @@ $router->get('/logout', 'AuthController@logout');
 
 // Dashboard Home
 $router->get('/admin/dashboard', function() {
-    require_admin();
+    AuthMiddleware::handleAdmin();
     $title = "Admin Dashboard";
     require_once dirname(__DIR__) . '/views/admin/dashboard.php';
 });

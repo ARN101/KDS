@@ -2,12 +2,13 @@
 // src/Controllers/AdminController.php
 
 require_once dirname(__DIR__) . '/utils.php';
+require_once dirname(__DIR__) . '/Middleware/AuthMiddleware.php';
 
 class AdminController {
 
     public function __construct() {
         // Enforce administrative permissions for all dashboard methods
-        require_admin();
+        AuthMiddleware::handleAdmin();
     }
 
     public function membersIndex() {
