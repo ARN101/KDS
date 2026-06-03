@@ -3,6 +3,7 @@
 
 require_once dirname(__DIR__) . '/utils.php';
 require_once dirname(__DIR__) . '/Middleware/AuthMiddleware.php';
+require_once dirname(__DIR__, 2) . '/config/database.php';
 
 class AdminController {
 
