@@ -1,28 +1,40 @@
 <?php
-// views/admin/dashboard.php
+
 require_once dirname(__DIR__, 2) . '/config/database.php';
 $db = Database::getConnection();
 
-// Fetch metrics
+
 $activeMembersCount = $db->query("SELECT COUNT(*) FROM members WHERE status = 'active'")->fetchColumn();
 $pendingRecruitsCount = $db->query("SELECT COUNT(*) FROM recruitment WHERE status = 'pending'")->fetchColumn();
 $totalAchievementsCount = $db->query("SELECT COUNT(*) FROM achievements")->fetchColumn();
 $totalEventsCount = $db->query("SELECT COUNT(*) FROM events")->fetchColumn();
 
-// Fetch recent messages
+
 $recentContacts = $db->query("SELECT * FROM contacts ORDER BY created_at DESC LIMIT 4")->fetchAll();
 
-// Fetch recent recruitment applications
+
 $recentApplicants = $db->query("SELECT * FROM recruitment ORDER BY applied_at DESC LIMIT 4")->fetchAll();
 
 $title = "Admin Overview";
 require_once __DIR__ . '/layouts/header.php';
 ?>
 
-<!-- Metric Grid -->
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div class="mb-8 p-4 bg-brandGreen/10 border border-brandGreen/30 text-white rounded text-xs animate-fade-in">
+        <?= e($_SESSION['success_message']) ?>
+    </div>
+    <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+<?php if (isset($_SESSION['error_message'])): ?>
+    <div class="mb-8 p-4 bg-brandRed/10 border border-brandRed/30 text-white rounded text-xs animate-fade-in">
+        <?= e($_SESSION['error_message']) ?>
+    </div>
+    <?php unset($_SESSION['error_message']); ?>
+<?php endif; ?>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
     
-    <!-- Card 1: Active Members -->
+    
     <div class="glass-panel p-6 rounded relative overflow-hidden group hover:border-brandRed/30 transition-all duration-300">
         <div class="flex items-center justify-between mb-4">
             <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Active Members</span>
@@ -36,7 +48,7 @@ require_once __DIR__ . '/layouts/header.php';
         <p class="text-[10px] text-gray-500 font-light">Debaters currently active in society</p>
     </div>
 
-    <!-- Card 2: Pending Recruits -->
+    
     <div class="glass-panel p-6 rounded relative overflow-hidden group hover:border-brandGreen/30 transition-all duration-300">
         <div class="flex items-center justify-between mb-4">
             <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Pending Applicants</span>
@@ -50,7 +62,7 @@ require_once __DIR__ . '/layouts/header.php';
         <p class="text-[10px] text-gray-500 font-light">New applicant submissions awaiting review</p>
     </div>
 
-    <!-- Card 3: Total Achievements -->
+    
     <div class="glass-panel p-6 rounded relative overflow-hidden group hover:border-brandRed/30 transition-all duration-300">
         <div class="flex items-center justify-between mb-4">
             <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Achievements</span>
@@ -64,7 +76,7 @@ require_once __DIR__ . '/layouts/header.php';
         <p class="text-[10px] text-gray-500 font-light">Trophies, speaker prizes, and awards</p>
     </div>
 
-    <!-- Card 4: Total Events -->
+    
     <div class="glass-panel p-6 rounded relative overflow-hidden group hover:border-brandGreen/30 transition-all duration-300">
         <div class="flex items-center justify-between mb-4">
             <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Total Events</span>
@@ -79,10 +91,10 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- Grid Lists -->
+
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     
-    <!-- Left: Recruitment Apps -->
+    
     <div class="lg:col-span-6 glass-panel p-6 rounded">
         <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
             <h2 class="font-serif text-lg font-semibold text-white">Recent Applications</h2>
@@ -113,7 +125,7 @@ require_once __DIR__ . '/layouts/header.php';
         <?php endif; ?>
     </div>
 
-    <!-- Right: Message Inbox -->
+    
     <div class="lg:col-span-6 glass-panel p-6 rounded">
         <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
             <h2 class="font-serif text-lg font-semibold text-white">Recent Messages</h2>
@@ -123,18 +135,44 @@ require_once __DIR__ . '/layouts/header.php';
         <?php if (!empty($recentContacts)): ?>
             <div class="space-y-4">
                 <?php foreach ($recentContacts as $msg): ?>
-                    <div class="p-4 bg-white/5 border border-white/5 rounded hover:border-white/10 transition-colors">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-xs font-semibold text-white"><?= e($msg['name']) ?></span>
-                            <span class="text-[9px] text-gray-500 font-mono"><?= date('M d, H:i', strtotime($msg['created_at'])) ?></span>
+                    <div class="p-4 bg-white/5 border border-white/5 rounded hover:border-white/10 transition-all duration-300 relative">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="text-xs font-semibold text-white block"><?= e($msg['name']) ?></span>
+                                <a href="mailto:<?= e($msg['email']) ?>" class="text-[10px] text-gray-400 hover:text-brandRed transition-colors font-mono">
+                                    <?= e($msg['email']) ?>
+                                </a>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[9px] text-gray-500 font-mono"><?= date('M d, H:i', strtotime($msg['created_at'])) ?></span>
+                                <button onclick="deleteContact(<?= $msg['id'] ?>, '<?= e(addslashes($msg['name'])) ?>')" class="text-gray-600 hover:text-brandRed transition-colors p-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <span class="text-[10px] text-brandRed font-semibold block mb-2"><?= e($msg['subject']) ?></span>
-                        <p class="text-xs text-gray-300 font-light leading-relaxed">
+                        <p class="text-xs text-gray-300 font-light leading-relaxed bg-black/40 p-2.5 rounded">
                             <?= e($msg['message']) ?>
                         </p>
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <form id="delete-contact-form" action="<?= $base_path ?>/admin/contacts/delete" method="POST" class="hidden">
+                <input type="hidden" name="csrf_token" value="<?= get_csrf_token() ?>">
+                <input type="hidden" name="id" id="delete-contact-id">
+            </form>
+
+            <script>
+                function deleteContact(id, name) {
+                    if (confirm(`Are you sure you want to delete the message from '${name}'?`)) {
+                        document.getElementById('delete-contact-id').value = id;
+                        document.getElementById('delete-contact-form').submit();
+                    }
+                }
+            </script>
         <?php else: ?>
             <p class="text-xs text-gray-500 italic py-8 text-center">No messages received.</p>
         <?php endif; ?>

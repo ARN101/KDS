@@ -1,5 +1,5 @@
 <?php
-// db/init.php
+
 
 require_once __DIR__ . '/../config/database.php';
 
@@ -7,7 +7,7 @@ try {
     $db = Database::getConnection();
     echo "Database connection successful.\n";
 
-    // 1. Load and execute the schema SQL
+    
     $schemaFile = __DIR__ . '/schema.sql';
     if (!file_exists($schemaFile)) {
         throw new Exception("Schema file not found at " . $schemaFile);
@@ -17,7 +17,7 @@ try {
     $db->exec($sql);
     echo "Tables and indexes created successfully.\n";
 
-    // 2. Seed Admin User
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM users");
     $userCount = $stmt->fetch()['count'];
 
@@ -37,7 +37,7 @@ try {
         echo "Email: $adminEmail\nPassword: $adminPassword\n";
     }
 
-    // 3. Seed Members
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM members");
     $memberCount = $stmt->fetch()['count'];
     if ($memberCount == 0) {
@@ -91,7 +91,7 @@ try {
         echo "Members seeded.\n";
     }
 
-    // 4. Seed Events
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM events");
     $eventCount = $stmt->fetch()['count'];
     if ($eventCount == 0) {
@@ -138,7 +138,7 @@ try {
         echo "Events seeded.\n";
     }
 
-    // 5. Seed Debates
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM debates");
     $debateCount = $stmt->fetch()['count'];
     if ($debateCount == 0) {
@@ -148,7 +148,7 @@ try {
                 'description' => 'A heavy-weight match challenging the rise of generative AI tools and cognitive automating agents on ethical and legal grounds.',
                 'debate_type' => 'British Parliamentary',
                 'motion' => 'This House would hold developers of autonomous systems legally responsible for the actions of their AI agents.',
-                'video_url' => 'dQw4w9WgXcQ', // Placeholder YouTube ID
+                'video_url' => 'dQw4w9WgXcQ', 
                 'debate_date' => '2025-11-21',
                 'category' => 'English',
                 'participants' => 'Gov: CSE Dept | Opp: EEE Dept',
@@ -174,7 +174,7 @@ try {
         echo "Debates seeded.\n";
     }
 
-    // 6. Seed Achievements
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM achievements");
     $achievementCount = $stmt->fetch()['count'];
     if ($achievementCount == 0) {
@@ -209,7 +209,7 @@ try {
         echo "Achievements seeded.\n";
     }
 
-    // 7. Seed Gallery
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM gallery");
     $galleryCount = $stmt->fetch()['count'];
     if ($galleryCount == 0) {
@@ -247,7 +247,7 @@ try {
         echo "Gallery seeded.\n";
     }
 
-    // 8. Seed Recruitment Applications
+    
     $stmt = $db->query("SELECT COUNT(*) as count FROM recruitment");
     $recCount = $stmt->fetch()['count'];
     if ($recCount == 0) {

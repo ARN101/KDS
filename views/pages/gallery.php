@@ -1,18 +1,14 @@
 <?php
-// views/pages/gallery.php
 
 require_once dirname(__DIR__, 2) . '/config/database.php';
 $db = Database::getConnection();
 
-// Fetch gallery items
 $stmt = $db->query("SELECT * FROM gallery ORDER BY upload_date DESC");
 $gallery_items = $stmt->fetchAll();
 
-// Include layouts header
 require_once dirname(__DIR__) . '/layouts/header.php';
 ?>
 
-<!-- Ambient Glow Spheres for Cinematic Lighting -->
 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none overflow-hidden z-0">
     <div class="absolute -top-[20%] left-[30%] w-[450px] h-[450px] bg-brandRed/5 rounded-full filter blur-[120px] animate-pulse" style="animation-duration: 9s;"></div>
     <div class="absolute top-[20%] right-[10%] w-[450px] h-[450px] bg-brandGreen/5 rounded-full filter blur-[120px] animate-pulse" style="animation-duration: 15s;"></div>
@@ -20,7 +16,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
 <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-12">
     
-    <!-- Title Area -->
+    
     <div class="text-center mb-16 max-w-2xl mx-auto">
         <span class="text-xs uppercase tracking-[0.25em] text-brandRed font-semibold mb-3 block">Visual Registry</span>
         <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
@@ -31,7 +27,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
         </p>
     </div>
 
-    <!-- Interactive Category Filter -->
+    
     <div class="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-16" id="filter-nav">
         <button class="filter-btn active px-5 py-2.5 rounded text-[10px] font-semibold uppercase tracking-widest bg-brandRed text-white border border-brandRed transition-all duration-300" data-category="all">
             All Moments
@@ -50,18 +46,18 @@ require_once dirname(__DIR__) . '/layouts/header.php';
         </button>
     </div>
 
-    <!-- Gallery Grid -->
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
         <?php if (!empty($gallery_items)): ?>
             <?php foreach ($gallery_items as $item): ?>
                 <div class="gallery-card group spotlight-card glass-panel rounded overflow-hidden aspect-[4/3] relative cursor-pointer z-10 transition-all duration-500" data-category="<?= e($item['category']) ?>">
-                    <!-- Card Background Image -->
+                    
                     <img src="<?= e($item['file_path']) ?>" alt="<?= e($item['title']) ?>" class="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-700 ease-out z-0">
                     
-                    <!-- Gradient Overlay -->
+                    
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300 z-10"></div>
                     
-                    <!-- Content overlay -->
+                    
                     <div class="absolute bottom-0 left-0 w-full p-6 z-20 flex flex-col justify-end">
                         <span class="text-[9px] uppercase tracking-wider text-brandRed font-semibold mb-1.5 block">
                             <?= e($item['category']) ?>
@@ -82,7 +78,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
 </div>
 
-<!-- Lightbox Modal container -->
 <div id="lightbox-modal" class="fixed inset-0 w-full h-full bg-black/95 z-[999] opacity-0 pointer-events-none flex flex-col justify-center items-center transition-all duration-500 ease-in-out p-6">
     <div class="absolute top-6 right-6 z-50">
         <button id="close-lightbox" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-black/50 text-white hover:text-brandRed hover:border-brandRed/30 transition-all duration-300">
@@ -105,13 +100,13 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Grid Category Filter Script
+        
         const filterButtons = document.querySelectorAll('#filter-nav .filter-btn');
         const cards = document.querySelectorAll('#gallery-grid .gallery-card');
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Toggle active class on button
+                
                 filterButtons.forEach(b => {
                     b.classList.remove('bg-brandRed', 'text-white', 'border-brandRed', 'active');
                     b.classList.add('bg-transparent', 'text-gray-400', 'border-white/10');
@@ -121,7 +116,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
                 const selectedCategory = btn.getAttribute('data-category');
 
-                // Animate filter elements with GSAP
+                
                 gsap.to(cards, {
                     opacity: 0,
                     scale: 0.95,
@@ -149,7 +144,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             });
         });
 
-        // 2. Lightbox Modal Trigger Script
+        
         const lightboxModal = document.getElementById('lightbox-modal');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCategory = document.getElementById('lightbox-category');
@@ -164,20 +159,20 @@ require_once dirname(__DIR__) . '/layouts/header.php';
                 const category = card.querySelector('span').innerText;
                 const caption = card.querySelector('p') ? card.querySelector('p').innerText : '';
 
-                // Populate lightbox data
+                
                 lightboxImg.src = img.src;
                 lightboxTitle.innerText = title;
                 lightboxCategory.innerText = category;
                 lightboxCaption.innerText = caption;
 
-                // Show modal with GSAP
+                
                 lightboxModal.classList.remove('pointer-events-none');
                 gsap.to(lightboxModal, {
                     opacity: 1,
                     duration: 0.4,
                     ease: 'power2.out',
                     onStart: () => {
-                        if (window.lenis) window.lenis.stop(); // Stop page scrolling
+                        if (window.lenis) window.lenis.stop(); 
                     }
                 });
             });
@@ -191,7 +186,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
                 onComplete: () => {
                     lightboxModal.classList.add('pointer-events-none');
                     lightboxImg.src = '';
-                    if (window.lenis) window.lenis.start(); // Allow scrolling again
+                    if (window.lenis) window.lenis.start(); 
                 }
             });
         };
@@ -206,6 +201,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 </script>
 
 <?php
-// Include layouts footer
+
 require_once dirname(__DIR__) . '/layouts/footer.php';
 ?>

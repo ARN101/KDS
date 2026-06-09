@@ -1,12 +1,11 @@
 <?php
-// views/admin/achievements.php
+
 $title = "Achievements Management";
 require_once __DIR__ . '/layouts/header.php';
 ?>
 
-<!-- Header Actions -->
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-    <!-- Search Bar -->
+    
     <div class="relative w-full sm:max-w-xs">
         <input type="text" id="achievement-search" placeholder="Search achievements..." 
                class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded text-sm text-white placeholder-gray-600 focus:border-brandRed focus:outline-none focus:ring-1 focus:ring-brandRed transition-all duration-300">
@@ -17,7 +16,7 @@ require_once __DIR__ . '/layouts/header.php';
         </div>
     </div>
 
-    <!-- Add Achievement Trigger -->
+    
     <button onclick="toggleModal('add-modal')" class="px-5 py-2.5 bg-brandRed hover:bg-brandRed/90 text-white text-xs font-semibold uppercase tracking-widest transition-all duration-300 rounded shadow-lg shadow-brandRed/20 flex items-center gap-2">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
@@ -26,7 +25,6 @@ require_once __DIR__ . '/layouts/header.php';
     </button>
 </div>
 
-<!-- Achievements Table Panel -->
 <div class="glass-panel rounded overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse" id="achievements-table">
@@ -47,7 +45,7 @@ require_once __DIR__ . '/layouts/header.php';
                             data-comp="<?= e(strtolower($ach['competition'])) ?>"
                             data-members="<?= e(strtolower($ach['team_members'])) ?>">
                             
-                            <!-- Award Title -->
+                            
                             <td class="py-4 px-6">
                                 <div class="font-bold text-white text-sm flex items-center gap-2">
                                     <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
@@ -57,22 +55,22 @@ require_once __DIR__ . '/layouts/header.php';
                                 </div>
                             </td>
 
-                            <!-- Competition -->
+                            
                             <td class="py-4 px-6 font-medium text-gray-200">
                                 <?= e($ach['competition']) ?>
                             </td>
 
-                            <!-- Members -->
+                            
                             <td class="py-4 px-6 text-gray-400">
                                 <?= e($ach['team_members']) ?>
                             </td>
 
-                            <!-- Year -->
+                            
                             <td class="py-4 px-6 text-gray-500 font-mono">
                                 <?= e($ach['year']) ?>
                             </td>
 
-                            <!-- Actions -->
+                            
                             <td class="py-4 px-6 text-right space-x-2">
                                 <button onclick='openEditModal(<?= json_encode($ach) ?>)' class="px-3 py-1.5 bg-white/5 border border-white/10 hover:border-brandRed hover:text-brandRed text-[10px] uppercase tracking-widest font-medium rounded transition-all duration-300">
                                     Edit
@@ -93,9 +91,6 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- ==========================================
-     ADD ACHIEVEMENT MODAL
-     ========================================== -->
 <div id="add-modal" class="fixed inset-0 w-full h-full bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="w-full max-w-xl glass-panel p-6 md:p-8 rounded-lg relative overflow-hidden spotlight-card">
         <div class="flex items-center justify-between mb-6 pb-2 border-b border-white/5">
@@ -111,14 +106,14 @@ require_once __DIR__ . '/layouts/header.php';
             <input type="hidden" name="csrf_token" value="<?= get_csrf_token() ?>">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Title -->
+                
                 <div class="flex flex-col">
                     <label for="add-title" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Award Title *</label>
                     <input type="text" id="add-title" name="title" required placeholder="e.g. Champion, Best Speaker" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Year -->
+                
                 <div class="flex flex-col">
                     <label for="add-year" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Competition Year *</label>
                     <input type="number" id="add-year" name="year" required value="<?= date('Y') ?>" 
@@ -126,21 +121,21 @@ require_once __DIR__ . '/layouts/header.php';
                 </div>
             </div>
 
-            <!-- Competition -->
+            
             <div class="flex flex-col">
                 <label for="add-comp" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Competition Name *</label>
                 <input type="text" id="add-comp" name="competition" required placeholder="e.g. 14th DUDS National Debate Championship" 
                        class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
             </div>
 
-            <!-- Team Members -->
+            
             <div class="flex flex-col">
                 <label for="add-members" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Winning Members *</label>
                 <input type="text" id="add-members" name="team_members" required placeholder="e.g. Adnan Rahman, Tasnim Alam, Nihad Hossain" 
                        class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
             </div>
 
-            <!-- Description -->
+            
             <div class="flex flex-col">
                 <label for="add-desc" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Description / Remarks</label>
                 <textarea id="add-desc" name="description" rows="3" placeholder="Brief outline of debate score, tournament scale, or topics argued in final..." 
@@ -159,9 +154,6 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- ==========================================
-     EDIT ACHIEVEMENT MODAL
-     ========================================== -->
 <div id="edit-modal" class="fixed inset-0 w-full h-full bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="w-full max-w-xl glass-panel p-6 md:p-8 rounded-lg relative overflow-hidden spotlight-card">
         <div class="flex items-center justify-between mb-6 pb-2 border-b border-white/5">
@@ -178,14 +170,14 @@ require_once __DIR__ . '/layouts/header.php';
             <input type="hidden" name="id" id="edit-id">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Title -->
+                
                 <div class="flex flex-col">
                     <label for="edit-title" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Award Title *</label>
                     <input type="text" id="edit-title" name="title" required 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Year -->
+                
                 <div class="flex flex-col">
                     <label for="edit-year" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Competition Year *</label>
                     <input type="number" id="edit-year" name="year" required 
@@ -193,21 +185,21 @@ require_once __DIR__ . '/layouts/header.php';
                 </div>
             </div>
 
-            <!-- Competition -->
+            
             <div class="flex flex-col">
                 <label for="edit-comp" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Competition Name *</label>
                 <input type="text" id="edit-comp" name="competition" required 
                        class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
             </div>
 
-            <!-- Team Members -->
+            
             <div class="flex flex-col">
                 <label for="edit-members" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Winning Members *</label>
                 <input type="text" id="edit-members" name="team_members" required 
                        class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
             </div>
 
-            <!-- Description -->
+            
             <div class="flex flex-col">
                 <label for="edit-desc" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Description / Remarks</label>
                 <textarea id="edit-desc" name="description" rows="3" 
@@ -226,16 +218,13 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- ==========================================
-     DELETE CONFIRMATION FORM (Hidden)
-     ========================================== -->
 <form action="<?= $base_path ?>/admin/achievements/delete" method="POST" id="delete-form" class="hidden">
     <input type="hidden" name="csrf_token" value="<?= get_csrf_token() ?>">
     <input type="hidden" name="id" id="delete-id">
 </form>
 
 <script>
-    // Search logic
+    
     const searchInput = document.getElementById('achievement-search');
     const tableRows = document.querySelectorAll('.achievement-row');
 
@@ -254,7 +243,7 @@ require_once __DIR__ . '/layouts/header.php';
         });
     });
 
-    // Toggle Modal
+    
     function toggleModal(modalId) {
         const modal = document.getElementById(modalId);
         if (modal.classList.contains('opacity-0')) {
@@ -266,7 +255,7 @@ require_once __DIR__ . '/layouts/header.php';
         }
     }
 
-    // Open Edit Modal
+    
     function openEditModal(ach) {
         document.getElementById('edit-id').value = ach.id;
         document.getElementById('edit-title').value = ach.title || '';
@@ -278,7 +267,7 @@ require_once __DIR__ . '/layouts/header.php';
         toggleModal('edit-modal');
     }
 
-    // Delete Trigger
+    
     function confirmDelete(id, title) {
         if (confirm(`Are you sure you want to permanently delete the achievement record '${title}'?`)) {
             document.getElementById('delete-id').value = id;

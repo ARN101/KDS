@@ -1,5 +1,5 @@
 <?php
-// views/admin/layouts/header.php
+
 $base_path = dirname($_SERVER['SCRIPT_NAME']);
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
 
@@ -18,12 +18,12 @@ function is_admin_active($route, $base_path) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($title) ? e($title) . " | KDS Admin" : "KDS Admin Chambers" ?></title>
     
-    <!-- Google Fonts -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -58,18 +58,18 @@ function is_admin_active($route, $base_path) {
         }
     </script>
     
-    <!-- Custom Style Sheet -->
+    
     <link rel="stylesheet" href="<?= $base_path ?>/assets/css/main.css">
     
-    <!-- GSAP for Admin Animations -->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body class="bg-brandBlack text-brandWhite min-h-screen flex selection:bg-brandRed selection:text-white">
 
-    <!-- Sidebar Navigation -->
+    
     <aside class="w-64 fixed inset-y-0 left-0 bg-darkGrey border-r border-white/5 flex flex-col justify-between z-30 transition-transform duration-300 transform -translate-x-full md:translate-x-0" id="admin-sidebar">
         <div>
-            <!-- Header/Logo area -->
+            
             <div class="px-6 py-6 border-b border-white/5 flex items-center justify-between">
                 <a href="<?= $base_path ?>/" class="flex items-center gap-3 group">
                     <div class="w-9 h-9 border border-white/10 flex items-center justify-center overflow-hidden bg-black rounded shadow-md group-hover:border-brandRed/50 transition-colors duration-300">
@@ -81,7 +81,7 @@ function is_admin_active($route, $base_path) {
                     </div>
                 </a>
                 
-                <!-- Mobile close button -->
+                
                 <button class="md:hidden text-gray-400 hover:text-white" onclick="toggleSidebar()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -89,7 +89,7 @@ function is_admin_active($route, $base_path) {
                 </button>
             </div>
             
-            <!-- Menu items -->
+            
             <nav class="px-4 py-6 space-y-1.5">
                 <a href="<?= $base_path ?>/admin/dashboard" class="flex items-center gap-3 px-4 py-3 rounded text-xs uppercase tracking-wider font-semibold transition-all duration-300 <?= is_admin_active('/admin/dashboard', $base_path) ? 'bg-brandRed text-white shadow-md shadow-brandRed/10' : 'text-gray-400 hover:bg-white/5 hover:text-white' ?>">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -142,7 +142,7 @@ function is_admin_active($route, $base_path) {
             </nav>
         </div>
         
-        <!-- Sidebar Footer/Logout -->
+        
         <div class="p-4 border-t border-white/5 bg-black/40">
             <div class="flex items-center gap-3 mb-4 px-2">
                 <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs font-semibold text-white">
@@ -165,12 +165,12 @@ function is_admin_active($route, $base_path) {
         </div>
     </aside>
 
-    <!-- Main Content Area Wrapper -->
+    
     <div class="flex-1 flex flex-col md:pl-64 min-w-0">
-        <!-- Top Navbar -->
+        
         <header class="h-16 border-b border-white/5 bg-darkGrey/80 backdrop-blur flex items-center justify-between px-6 sticky top-0 z-20">
             <div class="flex items-center gap-4">
-                <!-- Hamburger for mobile -->
+                
                 <button class="md:hidden text-gray-400 hover:text-white" onclick="toggleSidebar()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -186,10 +186,10 @@ function is_admin_active($route, $base_path) {
             </div>
         </header>
 
-        <!-- Main Body Content -->
+        
         <main class="flex-grow p-6 md:p-8 relative z-10">
             
-            <!-- Global Flash Messages inside Admin Area -->
+            
             <?php if (isset($_SESSION['success_message'])): ?>
                 <div class="mb-6 p-4 bg-brandGreen/10 border border-brandGreen/30 text-white rounded text-xs animate-fade-in">
                     <?= e($_SESSION['success_message']) ?>

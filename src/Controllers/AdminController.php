@@ -834,4 +834,35 @@ class AdminController {
         $_SESSION['error_message'] = "Failed to save gallery image file.";
         return false;
     }
+
+    public function contactsDelete() {
+        secure_session_start();
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirect('/admin/dashboard');
+        }
+
+        if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+            $_SESSION['error_message'] = "Security validation failed. Please try again.";
+            redirect('/admin/dashboard');
+        }
+
+        $id = intval($_POST['id'] ?? 0);
+        if ($id <= 0) {
+            $_SESSION['error_message'] = "Invalid message ID.";
+            redirect('/admin/dashboard');
+        }
+
+        try {
+            $db = Database::getConnection();
+            $stmt = $db->prepare("DELETE FROM contacts WHERE id = ?");
+            $stmt->execute([$id]);
+
+            $_SESSION['success_message'] = "Message deleted successfully.";
+            redirect('/admin/dashboard');
+        } catch (Exception $e) {
+            $_SESSION['error_message'] = "Failed to delete message: " . $e->getMessage();
+            redirect('/admin/dashboard');
+        }
+    }
 }

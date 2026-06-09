@@ -138,7 +138,7 @@ function initCinematicParticles() {
  * Prepares smooth page transition triggers
  */
 function setupPageTransitions() {
-    const links = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="javascript:"])');
+    const links = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="javascript:"]):not([href^="mailto:"])');
     const overlay = document.querySelector('.page-transition-overlay');
     if (!overlay) return;
 

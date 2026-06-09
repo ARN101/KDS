@@ -1,39 +1,28 @@
 <?php
-// views/pages/about.php
 
-// 1. Establish Database Connection & Query Data
 require_once dirname(__DIR__, 2) . '/config/database.php';
 $db = Database::getConnection();
 
-// Fetch Advisors/Patrons
 $patrons_stmt = $db->query("SELECT * FROM members WHERE role_title LIKE '%Patron%' OR role_title LIKE '%Advisor%' ORDER BY id ASC");
 $patrons = $patrons_stmt->fetchAll();
 
-// Fetch Active Executive Committee (excluding Patrons)
 $execs_stmt = $db->query("SELECT * FROM members WHERE status = 'active' AND role_title NOT LIKE '%Patron%' AND role_title NOT LIKE '%Advisor%' ORDER BY id ASC");
 $executive_committee = $execs_stmt->fetchAll();
 
-// Fetch Alumni Board
 $alumni_stmt = $db->query("SELECT * FROM members WHERE status = 'alumni' ORDER BY id ASC");
 $alumni_board = $alumni_stmt->fetchAll();
 
-// Fetch Achievements for the Historical Timeline
 $timeline_stmt = $db->query("SELECT * FROM achievements ORDER BY year DESC, id DESC");
 $timeline_achievements = $timeline_stmt->fetchAll();
 
-// Include layouts header
 require_once dirname(__DIR__) . '/layouts/header.php';
 ?>
 
-<!-- Ambient Glow Spheres for Cinematic Lighting -->
 <div class="absolute top-0 left-0 w-full h-[600px] pointer-events-none overflow-hidden z-0">
     <div class="absolute -top-[10%] left-[10%] w-[600px] h-[600px] bg-brandRed/5 rounded-full filter blur-[150px] opacity-70"></div>
     <div class="absolute top-[40%] right-[5%] w-[400px] h-[400px] bg-brandGreen/5 rounded-full filter blur-[120px] opacity-60"></div>
 </div>
 
-<!-- ==========================================
-     HERO: THE CHRONICLES OF LOGIC
-     ========================================== -->
 <section class="relative z-10 pt-20 pb-16 text-center px-6 max-w-4xl mx-auto">
     <span class="text-xs uppercase tracking-[0.25em] text-brandRed font-semibold mb-3 block">Chamber Origins</span>
     <h1 class="font-serif text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-none">
@@ -44,13 +33,10 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </p>
 </section>
 
-<!-- ==========================================
-     MISSION & VISION (GLASS PANELS)
-     ========================================== -->
 <section class="py-12 relative z-10 max-w-7xl mx-auto px-6 md:px-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- Mission Card -->
+        
         <div class="glass-panel p-8 md:p-12 rounded relative overflow-hidden group hover:border-brandRed/20 transition-all duration-300">
             <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-brandRed/5 rounded-full filter blur-[40px]"></div>
             <h3 class="font-serif text-2xl font-bold text-white mb-4 flex items-center gap-3">
@@ -61,7 +47,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </p>
         </div>
 
-        <!-- Vision Card -->
+        
         <div class="glass-panel p-8 md:p-12 rounded relative overflow-hidden group hover:border-brandGreen/20 transition-all duration-300">
             <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-brandGreen/5 rounded-full filter blur-[40px]"></div>
             <h3 class="font-serif text-2xl font-bold text-white mb-4 flex items-center gap-3">
@@ -75,16 +61,13 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
 </section>
 
-<!-- ==========================================
-     THE GOVERNING PANEL (DYNAMIC MEMBERS)
-     ========================================== -->
 <section class="py-24 relative z-10 max-w-7xl mx-auto px-6 md:px-12">
     <div class="text-center mb-16">
         <span class="text-xs uppercase tracking-[0.25em] text-brandRed font-semibold mb-2 block">Leadership</span>
         <h2 class="font-serif text-4xl md:text-5xl font-bold tracking-tight text-white">The Governing Board</h2>
     </div>
 
-    <!-- Patrons & Advisors Segment -->
+    
     <?php if (!empty($patrons)): ?>
     <div class="mb-16">
         <h3 class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-8 text-center">Patrons & Advisors</h3>
@@ -103,13 +86,13 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
     <?php endif; ?>
 
-    <!-- Executive Committee Segment -->
+    
     <div class="mb-16">
         <h3 class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-8 text-center">Executive Committee</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php if (!empty($executive_committee)): ?>
                 <?php foreach ($executive_committee as $ex): ?>
-                    <!-- Executive Member Card -->
+                    
                     <div class="spotlight-card glass-panel glass-panel-hover p-8 rounded flex flex-col justify-between min-h-[320px] transition-all duration-300 group">
                         <div class="flex items-start gap-4">
                             <img src="<?= e($ex['image_path']) ?>" alt="<?= e($ex['name']) ?>" class="w-16 h-16 rounded-full object-cover border border-white/10 shadow-md">
@@ -133,7 +116,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
         </div>
     </div>
 
-    <!-- Alumni Registry Segment -->
+    
     <?php if (!empty($alumni_board)): ?>
     <div>
         <h3 class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-8 text-center">Alumni Board</h3>
@@ -154,9 +137,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
 </section>
 
-<!-- ==========================================
-     HISTORICAL TIMELINE (DYNAMIC ACHIEVEMENTS)
-     ========================================== -->
 <section class="py-24 relative z-10 border-t border-white/5 bg-gradient-to-b from-brandBlack to-darkGrey/30">
     <div class="max-w-4xl mx-auto px-6">
         
@@ -168,29 +148,29 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </p>
         </div>
 
-        <!-- Vertical Timeline Path -->
+        
         <div class="relative border-l border-white/5 pl-8 ml-4 space-y-16">
             <?php if (!empty($timeline_achievements)): ?>
                 <?php foreach ($timeline_achievements as $index => $ach): ?>
                     <?php 
-                    // Alternate dot colors between green and red
+                    
                     $colorClass = ($index % 2 === 0) ? 'border-brandRed group-hover:bg-brandRed' : 'border-brandGreen group-hover:bg-brandGreen';
                     $textBadge = ($index % 2 === 0) ? 'text-brandRed' : 'text-brandGreen';
                     ?>
-                    <!-- Timeline Node -->
+                    
                     <div class="relative group">
                         
-                        <!-- Bullet Dot -->
+                        
                         <div class="absolute -left-[38px] top-1.5 w-4.5 h-4.5 bg-brandBlack border-2 <?= $colorClass ?> rounded-full transition-all duration-300 flex items-center justify-center">
                             <div class="w-1.5 h-1.5 bg-brandBlack rounded-full"></div>
                         </div>
 
-                        <!-- Date Badge -->
+                        
                         <span class="text-xs font-mono font-bold <?= $textBadge ?> uppercase tracking-wider block mb-2">
                             Year <?= e($ach['year']) ?> &mdash; <?= e($ach['title']) ?>
                         </span>
 
-                        <!-- Details card -->
+                        
                         <div class="glass-panel p-6 rounded group-hover:border-white/10 transition-all duration-300">
                             <h3 class="font-serif text-xl font-bold text-white mb-2 leading-tight group-hover:text-brandRed transition-colors duration-200">
                                 <?= e($ach['competition']) ?>
@@ -213,11 +193,10 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
 </section>
 
-<!-- Timeline and Board Reveal GSAP script -->
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Reveal timelines and profile cards
+    
     const reveals = document.querySelectorAll('.spotlight-card, .relative.group');
     reveals.forEach(element => {
         gsap.fromTo(element, 
@@ -238,6 +217,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 </script>
 
 <?php
-// Include layouts footer
+
 require_once dirname(__DIR__) . '/layouts/footer.php';
 ?>

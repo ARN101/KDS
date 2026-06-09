@@ -105,6 +105,7 @@ $router->get('/admin/dashboard', function() {
     $title = "Admin Dashboard";
     require_once dirname(__DIR__) . '/views/admin/dashboard.php';
 });
+$router->post('/admin/contacts/delete', 'AdminController@contactsDelete');
 
 // Member CRUD
 $router->get('/admin/members', 'AdminController@membersIndex');

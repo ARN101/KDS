@@ -1,17 +1,17 @@
 <?php
-// views/layouts/footer.php
+
 $base_path = dirname($_SERVER['SCRIPT_NAME']);
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
 ?>
     </main>
 
-    <!-- Footer Section -->
+    
     <footer class="relative z-10 bg-brandBlack border-t border-white/5 pt-16 pb-8 mt-24">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_center,rgba(0,104,55,0.04),transparent_60%)] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <!-- Col 1: Brand & Slogan -->
+                
                 <div class="md:col-span-2">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-12 h-12 border border-white/10 flex items-center justify-center overflow-hidden bg-black rounded shadow-md">
@@ -29,7 +29,7 @@ $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
                     </p>
                 </div>
 
-                <!-- Col 2: Navigation Links -->
+                
                 <div>
                     <h3 class="font-sans text-[11px] font-bold uppercase tracking-widest text-brandRed mb-4">
                         Quick Links
@@ -43,7 +43,7 @@ $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
                     </ul>
                 </div>
 
-                <!-- Col 3: Contact Info -->
+                
                 <div>
                     <h3 class="font-sans text-[11px] font-bold uppercase tracking-widest text-brandRed mb-4">
                         Chamber Address
@@ -60,22 +60,25 @@ $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
                 </div>
             </div>
 
-            <!-- Footer Divider -->
+            
             <div class="h-[1px] w-full bg-white/5 mb-8"></div>
 
-            <!-- Bottom Row: Social Icons & Copyright -->
+            
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <p class="text-[10px] uppercase tracking-wider text-gray-500 font-sans">
                     &copy; <?= date('Y') ?> KUET Debating Society. All Rights Reserved.
                 </p>
                 
-                <!-- Social Channels -->
+                
                 <div class="flex items-center gap-6">
-                    <a href="https://facebook.com/kuetds" target="_blank" class="text-gray-400 hover:text-brandRed transition-colors duration-300">
+                    <a href="https://www.facebook.com/KUETDebatingSociety" target="_blank" class="text-gray-400 hover:text-brandRed transition-colors duration-300">
                         <span class="text-xs uppercase tracking-widest font-semibold font-sans">Facebook</span>
                     </a>
-                    <a href="https://youtube.com" target="_blank" class="text-gray-400 hover:text-brandRed transition-colors duration-300">
+                    <a href="https://www.youtube.com/@kuetdebatingsociety2750" target="_blank" class="text-gray-400 hover:text-brandRed transition-colors duration-300">
                         <span class="text-xs uppercase tracking-widest font-semibold font-sans">YouTube</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/kuet-debating-society/" target="_blank" class="text-gray-400 hover:text-brandRed transition-colors duration-300">
+                        <span class="text-xs uppercase tracking-widest font-semibold font-sans">LinkedIn</span>
                     </a>
                     <a href="mailto:kds@kuet.ac.bd" class="text-gray-400 hover:text-brandRed transition-colors duration-300">
                         <span class="text-xs uppercase tracking-widest font-semibold font-sans">Contact Email</span>
@@ -86,7 +89,7 @@ $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
         </div>
     </footer>
 
-    <!-- Main Javascript Helper -->
+    
     <script src="<?= $base_path ?>/assets/js/main.js"></script>
 </body>
 </html>

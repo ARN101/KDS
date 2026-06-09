@@ -105,3 +105,14 @@ function get_current_user_details() {
     }
     return null;
 }
+
+function get_youtube_url($input) {
+    $input = trim($input ?? '');
+    if (empty($input)) {
+        return '';
+    }
+    if (strpos($input, 'youtube.com') !== false || strpos($input, 'youtu.be') !== false) {
+        return $input;
+    }
+    return 'https://www.youtube.com/watch?v=' . $input;
+}

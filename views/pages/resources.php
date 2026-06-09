@@ -1,19 +1,13 @@
 <?php
-// views/pages/resources.php
 
-// Include layouts header
 require_once dirname(__DIR__) . '/layouts/header.php';
 ?>
 
-<!-- Ambient Glow Spheres for Cinematic Lighting -->
 <div class="absolute top-0 right-0 w-full h-[600px] pointer-events-none overflow-hidden z-0">
     <div class="absolute -top-[10%] right-[10%] w-[600px] h-[600px] bg-brandGreen/5 rounded-full filter blur-[150px] opacity-70"></div>
     <div class="absolute top-[40%] left-[5%] w-[400px] h-[400px] bg-brandRed/5 rounded-full filter blur-[120px] opacity-60"></div>
 </div>
 
-<!-- ==========================================
-     HERO: THE ARSENAL OF INTELLECT
-     ========================================== -->
 <section class="relative z-10 pt-20 pb-16 text-center px-6 max-w-4xl mx-auto">
     <span class="text-xs uppercase tracking-[0.25em] text-brandRed font-semibold mb-3 block">Chamber Arsenal</span>
     <h1 class="font-serif text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-none">
@@ -24,9 +18,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </p>
 </section>
 
-<!-- ==========================================
-     DEBATE FORMATS SECTIONS
-     ========================================== -->
 <section class="py-12 relative z-10 max-w-7xl mx-auto px-6 md:px-12">
     <div class="text-center mb-16">
         <span class="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-2 block">Foundations</span>
@@ -35,7 +26,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <!-- Format 1: BP -->
+        
         <div class="spotlight-card glass-panel glass-panel-hover p-8 rounded flex flex-col justify-between min-h-[380px] transition-all duration-300">
             <div>
                 <div class="flex items-center justify-between mb-6">
@@ -53,7 +44,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </div>
         </div>
 
-        <!-- Format 2: AP -->
+        
         <div class="spotlight-card glass-panel glass-panel-hover p-8 rounded flex flex-col justify-between min-h-[380px] transition-all duration-300">
             <div>
                 <div class="flex items-center justify-between mb-6">
@@ -71,7 +62,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </div>
         </div>
 
-        <!-- Format 3: Traditional -->
+        
         <div class="spotlight-card glass-panel glass-panel-hover p-8 rounded flex flex-col justify-between min-h-[380px] transition-all duration-300">
             <div>
                 <div class="flex items-center justify-between mb-6">
@@ -92,9 +83,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
 </section>
 
-<!-- ==========================================
-     MOTION BANK (THEMATIC CATEGORIES)
-     ========================================== -->
 <section class="py-24 relative z-10 border-t border-white/5 bg-gradient-to-b from-brandBlack to-darkGrey/30">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
         <div class="text-center mb-16">
@@ -105,10 +93,10 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </p>
         </div>
 
-        <!-- Tabbed / Grid Categories -->
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <!-- Cat 1: Geopolitics & IR -->
+            
             <div class="glass-panel p-8 rounded border-white/5 hover:border-brandRed/20 transition-all duration-300">
                 <h3 class="font-serif text-xl font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1.5 h-5 bg-brandRed block"></span> Geopolitics & International Relations
@@ -129,7 +117,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
                 </ul>
             </div>
 
-            <!-- Cat 2: Tech, Science & AI -->
+            
             <div class="glass-panel p-8 rounded border-white/5 hover:border-brandGreen/20 transition-all duration-300">
                 <h3 class="font-serif text-xl font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1.5 h-5 bg-brandGreen block"></span> Technology, Ethics & Artificial Intelligence
@@ -150,7 +138,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
                 </ul>
             </div>
 
-            <!-- Cat 3: Economics & Finance -->
+            
             <div class="glass-panel p-8 rounded border-white/5 hover:border-brandGreen/20 transition-all duration-300">
                 <h3 class="font-serif text-xl font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1.5 h-5 bg-brandGreen block"></span> Economics & Financial Systems
@@ -171,7 +159,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
                 </ul>
             </div>
 
-            <!-- Cat 4: Social Justice & Media -->
+            
             <div class="glass-panel p-8 rounded border-white/5 hover:border-brandRed/20 transition-all duration-300">
                 <h3 class="font-serif text-xl font-bold text-white mb-6 flex items-center gap-2">
                     <span class="w-1.5 h-5 bg-brandRed block"></span> Social Justice, Culture & Media
@@ -196,9 +184,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
 </section>
 
-<!-- ==========================================
-     DOWNLOADABLE CHAMBER GUIDES
-     ========================================== -->
 <section class="py-24 relative z-10 max-w-7xl mx-auto px-6 md:px-12">
     <div class="text-center mb-16">
         <span class="text-xs uppercase tracking-[0.25em] text-brandRed font-semibold mb-2 block">Reference Guides</span>
@@ -207,7 +192,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- Guide 1 -->
+        
         <div class="glass-panel p-6 rounded flex items-start gap-4 hover:border-white/15 transition-all duration-300">
             <div class="w-10 h-10 border border-brandRed flex items-center justify-center font-serif text-brandRed font-bold text-lg rounded bg-brandRed/5 shrink-0">
                 BP
@@ -221,7 +206,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </div>
         </div>
 
-        <!-- Guide 2 -->
+        
         <div class="glass-panel p-6 rounded flex items-start gap-4 hover:border-white/15 transition-all duration-300">
             <div class="w-10 h-10 border border-brandGreen flex items-center justify-center font-serif text-brandGreen font-bold text-lg rounded bg-brandGreen/5 shrink-0">
                 AP
@@ -235,7 +220,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
             </div>
         </div>
 
-        <!-- Guide 3 -->
+        
         <div class="glass-panel p-6 rounded flex items-start gap-4 hover:border-white/15 transition-all duration-300">
             <div class="w-10 h-10 border border-white/20 flex items-center justify-center font-serif text-white/60 font-bold text-lg rounded bg-white/5 shrink-0">
                 MB
@@ -252,11 +237,10 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
 </section>
 
-<!-- GSAP Script -->
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade-in reveals
+    
     const reveals = document.querySelectorAll('.spotlight-card, .glass-panel');
     reveals.forEach(element => {
         gsap.fromTo(element, 
@@ -277,6 +261,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 </script>
 
 <?php
-// Include layouts footer
+
 require_once dirname(__DIR__) . '/layouts/footer.php';
 ?>

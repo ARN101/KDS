@@ -1,7 +1,7 @@
         </main>
     </div>
 
-    <!-- Script to toggle mobile sidebar -->
+    
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('admin-sidebar');

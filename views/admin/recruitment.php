@@ -1,9 +1,8 @@
 <?php
-// views/admin/recruitment.php
+
 $title = "Recruitment Applications";
 require_once __DIR__ . '/layouts/header.php';
 
-// Group applicants by status for tab counters and easy processing
 $pending = [];
 $approved = [];
 $rejected = [];
@@ -19,9 +18,8 @@ foreach ($applicants as $app) {
 }
 ?>
 
-<!-- Header Actions -->
 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
-    <!-- Search Bar -->
+    
     <div class="relative w-full lg:max-w-xs">
         <input type="text" id="applicant-search" placeholder="Search applicants..." 
                class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded text-sm text-white placeholder-gray-600 focus:border-brandRed focus:outline-none focus:ring-1 focus:ring-brandRed transition-all duration-300">
@@ -32,7 +30,7 @@ foreach ($applicants as $app) {
         </div>
     </div>
 
-    <!-- Tab Buttons -->
+    
     <div class="flex flex-wrap items-center gap-2 bg-black/45 p-1 rounded border border-white/5">
         <button onclick="switchTab('all')" id="tab-all" class="tab-btn active px-4 py-2 text-[10px] font-semibold uppercase tracking-widest rounded transition-all duration-300 bg-brandRed text-white">
             All (<?= count($applicants) ?>)
@@ -49,7 +47,6 @@ foreach ($applicants as $app) {
     </div>
 </div>
 
-<!-- Applicants Table Panel -->
 <div class="glass-panel rounded overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse" id="applicants-table">
@@ -74,30 +71,30 @@ foreach ($applicants as $app) {
                             data-email="<?= e(strtolower($app['email'])) ?>"
                             onclick="openDrawer(<?= e(json_encode($app)) ?>)">
                             
-                            <!-- Name & Dept -->
+                            
                             <td class="py-4 px-6">
                                 <div class="font-semibold text-white text-sm"><?= e($app['name']) ?></div>
                                 <div class="text-[10px] text-gray-500 font-mono mt-0.5"><?= e($app['department']) ?></div>
                             </td>
 
-                            <!-- Roll & Year -->
+                            
                             <td class="py-4 px-6">
                                 <div class="font-medium text-gray-200"><?= e($app['roll_no']) ?></div>
                                 <div class="text-[10px] text-gray-500 font-medium mt-0.5"><?= e($app['academic_year']) ?></div>
                             </td>
 
-                            <!-- Contact Info -->
+                            
                             <td class="py-4 px-6">
                                 <div><?= e($app['email']) ?></div>
                                 <div class="text-[10px] text-gray-500 mt-0.5 font-mono"><?= e($app['phone']) ?></div>
                             </td>
 
-                            <!-- Applied At -->
+                            
                             <td class="py-4 px-6 font-mono text-gray-500">
                                 <?= date('Y-m-d H:i', strtotime($app['applied_at'])) ?>
                             </td>
 
-                            <!-- Status -->
+                            
                             <td class="py-4 px-6">
                                 <?php if ($app['status'] === 'approved'): ?>
                                     <span class="px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider font-semibold bg-brandGreen/10 text-brandGreen border border-brandGreen/20">Approved</span>
@@ -108,7 +105,7 @@ foreach ($applicants as $app) {
                                 <?php endif; ?>
                             </td>
 
-                            <!-- Actions -->
+                            
                             <td class="py-4 px-6 text-right space-x-1" onclick="event.stopPropagation();">
                                 <?php if ($app['status'] === 'pending'): ?>
                                     <button onclick="updateApplicantStatus(<?= $app['id'] ?>, 'approved')" class="px-2.5 py-1.5 bg-brandGreen/20 hover:bg-brandGreen hover:text-white border border-brandGreen/30 text-brandGreen text-[10px] uppercase tracking-widest font-semibold rounded transition-all duration-300">
@@ -135,11 +132,8 @@ foreach ($applicants as $app) {
     </div>
 </div>
 
-<!-- ==========================================
-     RECRUITMENT DETAIL SLIDEOUT DRAWER
-     ========================================== -->
 <div id="detail-drawer" class="fixed inset-y-0 right-0 w-full max-w-lg bg-darkGrey/95 backdrop-blur-md border-l border-white/10 z-50 shadow-2xl translate-x-full transition-transform duration-500 ease-out flex flex-col">
-    <!-- Drawer Header -->
+    
     <div class="px-6 py-6 border-b border-white/5 flex items-center justify-between bg-black/30">
         <div>
             <h2 class="font-serif text-lg font-bold text-white" id="drawer-name">Applicant Name</h2>
@@ -152,9 +146,9 @@ foreach ($applicants as $app) {
         </button>
     </div>
 
-    <!-- Drawer Content -->
+    
     <div class="flex-grow overflow-y-auto p-6 space-y-6">
-        <!-- Contact Info Cards -->
+        
         <div class="grid grid-cols-2 gap-4">
             <div class="glass-panel p-4 rounded bg-black/40">
                 <span class="text-[9px] uppercase tracking-wider text-gray-500 block mb-1">Email Address</span>
@@ -166,7 +160,7 @@ foreach ($applicants as $app) {
             </div>
         </div>
 
-        <!-- Academic Info -->
+        
         <div class="glass-panel p-4 rounded bg-black/40 space-y-3">
             <h3 class="text-[10px] uppercase tracking-widest text-brandRed font-semibold border-b border-white/5 pb-1">Academic Status</h3>
             <div class="grid grid-cols-3 gap-2 text-xs">
@@ -185,7 +179,7 @@ foreach ($applicants as $app) {
             </div>
         </div>
 
-        <!-- Debating Experience -->
+        
         <div class="space-y-2">
             <h3 class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Debating Experience</h3>
             <div class="bg-black/60 border border-white/10 p-4 rounded text-xs text-gray-300 font-light leading-relaxed" id="drawer-experience">
@@ -193,7 +187,7 @@ foreach ($applicants as $app) {
             </div>
         </div>
 
-        <!-- Motivation (Statement of Purpose) -->
+        
         <div class="space-y-2">
             <h3 class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Motivation Statement</h3>
             <div class="bg-brandRed/5 border border-brandRed/10 p-4 rounded text-xs text-gray-300 font-light leading-relaxed italic relative overflow-hidden" id="drawer-motivation">
@@ -202,15 +196,12 @@ foreach ($applicants as $app) {
         </div>
     </div>
 
-    <!-- Drawer Footer Actions -->
+    
     <div class="p-6 border-t border-white/5 bg-black/40 flex gap-3" id="drawer-actions">
-        <!-- Buttons injected dynamically or form submission handler -->
+        
     </div>
 </div>
 
-<!-- ==========================================
-     UPDATE STATUS FORM (Hidden)
-     ========================================== -->
 <form action="<?= $base_path ?>/admin/recruitment/status" method="POST" id="status-form" class="hidden">
     <input type="hidden" name="csrf_token" value="<?= get_csrf_token() ?>">
     <input type="hidden" name="id" id="status-id">
@@ -218,7 +209,7 @@ foreach ($applicants as $app) {
 </form>
 
 <script>
-    // Tab switching logic
+    
     let activeTab = 'all';
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tableRows = document.querySelectorAll('.applicant-row');
@@ -248,13 +239,13 @@ foreach ($applicants as $app) {
     function switchTab(tab) {
         activeTab = tab;
 
-        // Reset active style on buttons
+        
         tabButtons.forEach(btn => {
             btn.classList.remove('bg-brandRed', 'text-white', 'active');
             btn.classList.add('text-gray-400', 'hover:text-white');
         });
 
-        // Set active class
+        
         const activeBtn = document.getElementById(`tab-${tab}`);
         activeBtn.classList.add('bg-brandRed', 'text-white', 'active');
         activeBtn.classList.remove('text-gray-400', 'hover:text-white');
@@ -264,7 +255,7 @@ foreach ($applicants as $app) {
 
     searchInput.addEventListener('input', filterTable);
 
-    // Side Drawer Logic
+    
     const drawer = document.getElementById('detail-drawer');
 
     function openDrawer(app) {
@@ -280,9 +271,9 @@ foreach ($applicants as $app) {
         document.getElementById('drawer-experience').innerText = app.debating_experience || 'No previous debating experience reported.';
         document.getElementById('drawer-motivation').innerText = `"${app.motivation}"`;
 
-        // Update actions based on current status
+        
         const actionContainer = document.getElementById('drawer-actions');
-        actionContainer.innerHTML = ''; // Clear
+        actionContainer.innerHTML = ''; 
 
         if (app.status === 'pending') {
             actionContainer.innerHTML = `
@@ -301,7 +292,7 @@ foreach ($applicants as $app) {
             `;
         }
 
-        // Open animation with GSAP or css class
+        
         drawer.classList.remove('translate-x-full');
     }
 
@@ -309,7 +300,7 @@ foreach ($applicants as $app) {
         drawer.classList.add('translate-x-full');
     }
 
-    // Update applicant status submitter
+    
     function updateApplicantStatus(id, newStatus) {
         let msg = '';
         if (newStatus === 'approved') {

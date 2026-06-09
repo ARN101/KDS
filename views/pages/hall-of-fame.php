@@ -1,27 +1,25 @@
 <?php
-// views/pages/hall-of-fame.php
 
-// 1. Establish Database Connection & Query Achievements
+
+
 require_once dirname(__DIR__, 2) . '/config/database.php';
 $db = Database::getConnection();
 
-// Fetch achievements sorted by year DESC
+
 $stmt = $db->query("SELECT * FROM achievements ORDER BY year DESC, id DESC");
 $achievements = $stmt->fetchAll();
 
-// Include layouts header
+
 require_once dirname(__DIR__) . '/layouts/header.php';
 ?>
 
-<!-- Ambient Glow Spheres for Cinematic Lighting -->
+
 <div class="absolute top-0 left-0 w-full h-[600px] pointer-events-none overflow-hidden z-0">
     <div class="absolute -top-[10%] left-[20%] w-[600px] h-[600px] bg-brandRed/5 rounded-full filter blur-[150px] opacity-70"></div>
     <div class="absolute top-[40%] right-[10%] w-[450px] h-[450px] bg-brandGreen/5 rounded-full filter blur-[120px] opacity-60"></div>
 </div>
 
-<!-- ==========================================
-     HERO: THE ARENA DECORATION
-     ========================================== -->
+
 <section class="relative z-10 pt-20 pb-16 text-center px-6 max-w-4xl mx-auto">
     <span class="text-xs uppercase tracking-[0.25em] text-brandRed font-semibold mb-3 block">Chamber Laurels</span>
     <h1 class="font-serif text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-none">
@@ -32,15 +30,13 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </p>
 </section>
 
-<!-- ==========================================
-     TROPHY GRID (DYNAMIC ACHIEVEMENTS)
-     ========================================== -->
+
 <section class="py-12 relative z-10 max-w-7xl mx-auto px-6 md:px-12">
     
-    <!-- Year Categories Grouping -->
+    
     <?php if (!empty($achievements)): ?>
         <?php 
-        // Group achievements by year
+        
         $grouped = [];
         foreach ($achievements as $ach) {
             $grouped[$ach['year']][] = $ach;
@@ -48,7 +44,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
         ?>
         
         <?php foreach ($grouped as $year => $year_achievements): ?>
-            <!-- Year Container -->
+            
             <div class="mb-20">
                 <div class="flex items-center gap-4 mb-10">
                     <span class="font-serif text-3xl font-bold text-white tracking-tight"><?= e($year) ?></span>
@@ -59,17 +55,17 @@ require_once dirname(__DIR__) . '/layouts/header.php';
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <?php foreach ($year_achievements as $ach): ?>
                         
-                        <!-- Spotlight Trophy Card -->
+                        
                         <div class="spotlight-card glass-panel glass-panel-hover p-8 rounded flex flex-col justify-between min-h-[350px] transition-all duration-300 group">
                             
                             <div>
-                                <!-- Award Title -->
+                                
                                 <div class="flex items-center justify-between mb-6">
                                     <span class="px-3 py-1 bg-brandRed/10 border border-brandRed/20 rounded text-[9px] uppercase tracking-wider text-brandRed font-semibold">
                                         <?= e($ach['title']) ?>
                                     </span>
                                     
-                                    <!-- Dynamic Trophy SVG Icon -->
+                                    
                                     <svg class="w-5 h-5 text-gray-600 group-hover:text-brandRed transition-colors duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15V17M12 17V19M12 17H15M12 17H9M18.75 6.75H19.5a2.25 2.25 0 012.25 2.25v3a2.25 2.25 0 01-2.25 2.25h-.75M5.25 6.75H4.5A2.25 2.25 0 002.25 9v3a2.25 2.25 0 002.25 2.25h.75m10.5-6v11.25m-6-11.25v11.25M3.75 6.75h16.5M9.75 22h4.5" />
                                     </svg>
@@ -105,9 +101,7 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 
 </section>
 
-<!-- ==========================================
-     LEGENDARY ALUMNI MOTIVATIONAL BOX
-     ========================================== -->
+
 <section class="py-20 relative z-10 border-t border-white/5 bg-gradient-to-t from-darkGrey/40 to-brandBlack text-center">
     <div class="max-w-3xl mx-auto px-6">
         <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Are You Ready to Write History?</h2>
@@ -120,11 +114,11 @@ require_once dirname(__DIR__) . '/layouts/header.php';
     </div>
 </section>
 
-<!-- GSAP ScrollTrigger script -->
+
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Timeline node fade reveals
+    
     const trophyCards = document.querySelectorAll('.spotlight-card');
     trophyCards.forEach(card => {
         gsap.fromTo(card, 
@@ -145,6 +139,6 @@ require_once dirname(__DIR__) . '/layouts/header.php';
 </script>
 
 <?php
-// Include layouts footer
+
 require_once dirname(__DIR__) . '/layouts/footer.php';
 ?>

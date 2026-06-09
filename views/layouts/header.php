@@ -1,16 +1,16 @@
 <?php
-// views/layouts/header.php
+
 $base_path = dirname($_SERVER['SCRIPT_NAME']);
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
 
-// Establish active page for navigation highlight
+
 $request_uri = $_SERVER['REQUEST_URI'];
 $active_class = "text-brandRed border-b-2 border-brandRed font-semibold";
 $inactive_class = "text-gray-300 hover:text-white transition-all duration-300 animated-underline";
 
 function is_active_route($route, $base_path) {
     $request_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    // Normalize path
+    
     $check_path = $base_path . $route;
     if ($route === '/' && ($request_path === $base_path . '/' || $request_path === $base_path || $request_path === '')) {
         return true;
@@ -25,17 +25,17 @@ function is_active_route($route, $base_path) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($title) ? e($title) . " | KUET Debating Society" : "KUET Debating Society | The Voice of Reason" ?></title>
     
-    <!-- Meta tags for SEO -->
+    
     <meta name="description" content="KUET Debating Society (KDS) is the premier platform for intellectual discourse, logical reasoning, and competitive public speaking at Khulna University of Engineering & Technology.">
     <meta name="keywords" content="KUET, Debating, KDS, Debate Club, Khulna University of Engineering, BP format, public speaking, the voice of reason">
     <meta name="author" content="KUET Debating Society">
     
-    <!-- Google Fonts -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -53,8 +53,8 @@ function is_active_route($route, $base_path) {
                             100: '#F3F4F6',
                             200: '#E5E7EB',
                             300: '#D1D5DB',
-                            400: '#CBD5E1', // increased brightness
-                            500: '#94A3B8', // increased brightness
+                            400: '#CBD5E1', 
+                            500: '#94A3B8', 
                             600: '#64748B',
                             700: '#475569',
                             800: '#334155',
@@ -70,29 +70,29 @@ function is_active_route($route, $base_path) {
         }
     </script>
     
-    <!-- Custom Style Sheet -->
+    
     <link rel="stylesheet" href="<?= $base_path ?>/assets/css/main.css">
     
-    <!-- GSAP & Lenis Smooth Scroll CDNs -->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
     
-    <!-- Page Transition Overlay -->
+    
     <div class="page-transition-overlay"></div>
 </head>
 <body class="bg-brandBlack text-brandWhite min-h-screen relative flex flex-col justify-between selection:bg-brandRed selection:text-white">
 
-    <!-- Global Floating Particles Background (Canvas) -->
+    
     <div class="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-40">
         <canvas id="particles-canvas"></canvas>
     </div>
 
-    <!-- Header Navigation -->
+    
     <header class="fixed top-0 left-0 w-full z-50 bg-transparent py-6 border-b border-transparent transition-all duration-500">
         <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
             
-            <!-- Logo Section -->
+            
             <a href="<?= $base_path ?>/" class="flex items-center gap-3 group relative z-50">
                 <div class="w-10 h-10 border border-white/10 flex items-center justify-center overflow-hidden bg-black rounded shadow-lg shadow-brandRed/10 transition-all duration-300 group-hover:scale-105 group-hover:shadow-brandRed/30 group-hover:border-brandRed/50">
                     <img src="<?= $base_path ?>/assets/images/logo.jpg" alt="KDS Logo" class="w-full h-full object-cover">
@@ -103,7 +103,7 @@ function is_active_route($route, $base_path) {
                 </div>
             </a>
 
-            <!-- Desktop Menu -->
+            
             <nav class="hidden lg:flex items-center gap-8">
                 <a href="<?= $base_path ?>/" class="<?= is_active_route('/', $base_path) ? $active_class : $inactive_class ?> text-xs uppercase tracking-widest py-1">Home</a>
                 <a href="<?= $base_path ?>/about" class="<?= is_active_route('/about', $base_path) ? $active_class : $inactive_class ?> text-xs uppercase tracking-widest py-1">About Us</a>
@@ -115,9 +115,9 @@ function is_active_route($route, $base_path) {
                 <a href="<?= $base_path ?>/contact" class="<?= is_active_route('/contact', $base_path) ? $active_class : $inactive_class ?> text-xs uppercase tracking-widest py-1">Contact</a>
             </nav>
 
-            <!-- Action & Navigation Area (Right side) -->
+            
             <div class="flex items-center gap-4">
-                <!-- Authentication Actions (Desktop Only) -->
+                
                 <div class="hidden lg:flex items-center gap-4">
                     <?php if (is_authenticated()): ?>
                         <?php if (is_admin()): ?>
@@ -135,7 +135,7 @@ function is_active_route($route, $base_path) {
                     <?php endif; ?>
                 </div>
 
-                <!-- Stylized Asymmetric Menu Toggle (Mobile & Desktop) -->
+                
                 <button id="chambers-menu-btn" class="relative z-50 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex flex-col justify-center items-center focus:outline-none hover:border-brandRed hover:bg-brandRed/10 transition-all duration-300 shadow-lg" title="Open Chambers Navigation">
                     <div class="flex flex-col gap-1.5 items-end justify-center w-5">
                         <span class="w-5 h-0.5 bg-white transition-all duration-300 bar-1"></span>
@@ -145,12 +145,12 @@ function is_active_route($route, $base_path) {
             </div>
         </div>
 
-        <!-- Soft Backdrop Overlay (Click to close) -->
+        
         <div id="sidebar-backdrop" class="fixed inset-0 bg-black/40 backdrop-blur-[1px] opacity-0 pointer-events-none transition-all duration-500 z-40"></div>
 
-        <!-- Sliding Navigation Sidebar Drawer -->
+        
         <div id="chambers-sidebar" class="fixed inset-y-0 right-0 w-80 md:w-96 bg-black/95 backdrop-blur-2xl border-l border-white/10 z-50 shadow-2xl translate-x-full transition-transform duration-500 ease-out flex flex-col justify-between p-8">
-            <!-- Sidebar Header -->
+            
             <div class="flex items-center gap-3 border-b border-white/5 pb-6">
                 <div class="w-8 h-8 border border-white/10 flex items-center justify-center overflow-hidden bg-black rounded">
                     <img src="<?= $base_path ?>/assets/images/logo.jpg" alt="KDS Logo" class="w-full h-full object-cover">
@@ -161,7 +161,7 @@ function is_active_route($route, $base_path) {
                 </div>
             </div>
 
-            <!-- Staggered Navigation Links -->
+            
             <nav class="flex flex-col gap-4 py-8">
                 <a href="<?= $base_path ?>/" class="sidebar-link font-serif text-xl md:text-2xl font-bold tracking-tight text-white hover:text-brandRed" style="opacity: 0; transform: translateX(20px);">Home</a>
                 <a href="<?= $base_path ?>/about" class="sidebar-link font-serif text-xl md:text-2xl font-bold tracking-tight text-white hover:text-brandRed" style="opacity: 0; transform: translateX(20px);">About Us</a>
@@ -173,9 +173,9 @@ function is_active_route($route, $base_path) {
                 <a href="<?= $base_path ?>/contact" class="sidebar-link font-serif text-xl md:text-2xl font-bold tracking-tight text-white hover:text-brandRed" style="opacity: 0; transform: translateX(20px);">Contact</a>
             </nav>
 
-            <!-- Sidebar Footer Area -->
+            
             <div class="border-t border-white/5 pt-6 space-y-5">
-                <!-- Portal Access Status -->
+                
                 <div>
                     <?php if (is_authenticated()): ?>
                         <div class="flex flex-col gap-2">
@@ -198,22 +198,24 @@ function is_active_route($route, $base_path) {
                     <?php endif; ?>
                 </div>
 
-                <!-- Clock & Social Icons -->
+                
                 <div class="flex items-center justify-between text-[9px] text-gray-500 font-mono">
                     <span id="chrono-clock">--:--:--</span>
                     <div class="flex gap-2.5">
-                        <a href="https://facebook.com" target="_blank" class="hover:text-white transition-colors">FB</a>
+                        <a href="https://www.facebook.com/KUETDebatingSociety" target="_blank" class="hover:text-white transition-colors">FB</a>
                         <span>•</span>
-                        <a href="https://youtube.com" target="_blank" class="hover:text-white transition-colors">YT</a>
+                        <a href="https://www.youtube.com/@kuetdebatingsociety2750" target="_blank" class="hover:text-white transition-colors">YT</a>
+                        <span>•</span>
+                        <a href="https://www.linkedin.com/company/kuet-debating-society/" target="_blank" class="hover:text-white transition-colors">LI</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Stylized Sidebar CSS Animations -->
+    
     <style>
-        /* Asymmetric Hamburger Menu Toggle morphing into X */
+        
         #chambers-menu-btn.active .bar-1 {
             transform: translateY(3.5px) rotate(45deg);
             background-color: #ED1C24;
@@ -228,7 +230,7 @@ function is_active_route($route, $base_path) {
             background-color: #ED1C24;
         }
 
-        /* Hover animation for sidebar links */
+        
         .sidebar-link {
             position: relative;
             padding-left: 0;
@@ -239,7 +241,7 @@ function is_active_route($route, $base_path) {
         }
     </style>
 
-    <!-- Chambers Menu Script Trigger -->
+    
     <script>
         const chambersBtn = document.getElementById('chambers-menu-btn');
         const chambersSidebar = document.getElementById('chambers-sidebar');
@@ -248,7 +250,7 @@ function is_active_route($route, $base_path) {
 
         let isSidebarOpen = false;
 
-        // Clock Update
+        
         function updateChrono() {
             if (!chronoClock) return;
             const now = new Date();
@@ -268,14 +270,14 @@ function is_active_route($route, $base_path) {
                 sidebarBackdrop.classList.add('opacity-100', 'pointer-events-auto');
                 chambersSidebar.classList.remove('translate-x-full');
 
-                // Stagger link entrance with GSAP
+                
                 gsap.killTweensOf(".sidebar-link");
                 gsap.fromTo(".sidebar-link", 
                     { opacity: 0, x: 20 }, 
                     { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: "power2.out", delay: 0.15 }
                 );
 
-                // Stop scrolling
+                
                 if (window.lenis) window.lenis.stop();
             } else {
                 chambersBtn.classList.remove('active');
@@ -283,7 +285,7 @@ function is_active_route($route, $base_path) {
                 sidebarBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
                 chambersSidebar.classList.add('translate-x-full');
 
-                // Allow scrolling
+                
                 if (window.lenis) window.lenis.start();
             }
         }
@@ -293,12 +295,12 @@ function is_active_route($route, $base_path) {
             toggleSidebar(!isSidebarOpen);
         });
 
-        // Close on clicking backdrop
+        
         sidebarBackdrop.addEventListener('click', () => {
             toggleSidebar(false);
         });
 
-        // Close on clicking links
+        
         const sidebarLinks = document.querySelectorAll('.sidebar-link');
         sidebarLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -307,5 +309,5 @@ function is_active_route($route, $base_path) {
         });
     </script>
 
-    <!-- Content Wrapper (Offsets fixed header) -->
+    
     <main class="flex-grow pt-24 relative z-10">

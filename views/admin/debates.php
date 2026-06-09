@@ -1,12 +1,12 @@
 <?php
-// views/admin/debates.php
+
 $title = "Debates Management";
 require_once __DIR__ . '/layouts/header.php';
 ?>
 
-<!-- Header Actions -->
+
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-    <!-- Search Bar -->
+    
     <div class="relative w-full sm:max-w-xs">
         <input type="text" id="debate-search" placeholder="Search debates..." 
                class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded text-sm text-white placeholder-gray-600 focus:border-brandRed focus:outline-none focus:ring-1 focus:ring-brandRed transition-all duration-300">
@@ -17,7 +17,7 @@ require_once __DIR__ . '/layouts/header.php';
         </div>
     </div>
 
-    <!-- Add Debate Trigger -->
+    
     <button onclick="toggleModal('add-modal')" class="px-5 py-2.5 bg-brandRed hover:bg-brandRed/90 text-white text-xs font-semibold uppercase tracking-widest transition-all duration-300 rounded shadow-lg shadow-brandRed/20 flex items-center gap-2">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
@@ -26,7 +26,7 @@ require_once __DIR__ . '/layouts/header.php';
     </button>
 </div>
 
-<!-- Debates Table Panel -->
+
 <div class="glass-panel rounded overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse" id="debates-table">
@@ -48,7 +48,7 @@ require_once __DIR__ . '/layouts/header.php';
                             data-type="<?= e(strtolower($debate['debate_type'])) ?>"
                             data-motion="<?= e(strtolower($debate['motion'])) ?>">
                             
-                            <!-- Title & Category -->
+                            
                             <td class="py-4 px-6">
                                 <div class="font-semibold text-white text-sm"><?= e($debate['title']) ?></div>
                                 <span class="px-2 py-0.5 mt-1 inline-block rounded text-[9px] uppercase tracking-wider font-semibold bg-white/5 border border-white/10 text-gray-400">
@@ -56,27 +56,27 @@ require_once __DIR__ . '/layouts/header.php';
                                 </span>
                             </td>
 
-                            <!-- Debate Type -->
+                            
                             <td class="py-4 px-6 font-medium text-gray-200">
                                 <?= e($debate['debate_type']) ?>
                             </td>
 
-                            <!-- Motion -->
+                            
                             <td class="py-4 px-6 max-w-xs truncate text-gray-400 italic font-light">
                                 "<?= e($debate['motion']) ?>"
                             </td>
 
-                            <!-- Outcome -->
+                            
                             <td class="py-4 px-6 text-gray-300 font-medium">
                                 <?= e($debate['outcome'] ?? '---') ?>
                             </td>
 
-                            <!-- Date -->
+                            
                             <td class="py-4 px-6 text-gray-500 font-mono">
                                 <?= $debate['debate_date'] ? date('Y-m-d', strtotime($debate['debate_date'])) : '---' ?>
                             </td>
 
-                            <!-- Actions -->
+                            
                             <td class="py-4 px-6 text-right space-x-2">
                                 <button onclick='openEditModal(<?= json_encode($debate) ?>)' class="px-3 py-1.5 bg-white/5 border border-white/10 hover:border-brandRed hover:text-brandRed text-[10px] uppercase tracking-widest font-medium rounded transition-all duration-300">
                                     Edit
@@ -97,9 +97,7 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- ==========================================
-     ADD DEBATE MODAL
-     ========================================== -->
+
 <div id="add-modal" class="fixed inset-0 w-full h-full bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="w-full max-w-xl glass-panel p-6 md:p-8 rounded-lg relative overflow-hidden spotlight-card">
         <div class="flex items-center justify-between mb-6 pb-2 border-b border-white/5">
@@ -115,14 +113,14 @@ require_once __DIR__ . '/layouts/header.php';
             <input type="hidden" name="csrf_token" value="<?= get_csrf_token() ?>">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Title -->
+                
                 <div class="flex flex-col">
                     <label for="add-title" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Debate Title *</label>
                     <input type="text" id="add-title" name="title" required placeholder="e.g. Intra-KUET Championship Finals" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Debate Type -->
+                
                 <div class="flex flex-col">
                     <label for="add-type" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Format Type *</label>
                     <select id="add-type" name="debate_type" required 
@@ -134,7 +132,7 @@ require_once __DIR__ . '/layouts/header.php';
                 </div>
             </div>
 
-            <!-- Motion -->
+            
             <div class="flex flex-col">
                 <label for="add-motion" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Motion / Topic *</label>
                 <input type="text" id="add-motion" name="motion" required placeholder="e.g. This House would regulate artificial intelligence development." 
@@ -142,7 +140,7 @@ require_once __DIR__ . '/layouts/header.php';
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <!-- Category -->
+                
                 <div class="flex flex-col">
                     <label for="add-category" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Language *</label>
                     <select id="add-category" name="category" required 
@@ -152,22 +150,21 @@ require_once __DIR__ . '/layouts/header.php';
                     </select>
                 </div>
 
-                <!-- Date -->
+                
                 <div class="flex flex-col">
                     <label for="add-date" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Debate Date</label>
                     <input type="date" id="add-date" name="debate_date" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Video URL / ID -->
                 <div class="flex flex-col">
-                    <label for="add-video" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">YouTube Video ID / URL</label>
-                    <input type="text" id="add-video" name="video_url" placeholder="e.g. dQw4w9WgXcQ" 
+                    <label for="add-video" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">YouTube Video URL *</label>
+                    <input type="text" id="add-video" name="video_url" required placeholder="e.g. https://www.youtube.com/watch?v=3v3gU0-dDkM" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
             </div>
 
-            <!-- Participants -->
+            
             <div class="flex flex-col">
                 <label for="add-participants" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Key Participants / Teams</label>
                 <input type="text" id="add-participants" name="participants" placeholder="e.g. Gov: Team A, Opp: Team B" 
@@ -175,14 +172,14 @@ require_once __DIR__ . '/layouts/header.php';
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Outcome -->
+                
                 <div class="flex flex-col">
                     <label for="add-outcome" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Outcome / Decision</label>
                     <input type="text" id="add-outcome" name="outcome" placeholder="e.g. Government won (3-0)" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Description -->
+                
                 <div class="flex flex-col">
                     <label for="add-description" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Additional Details</label>
                     <input type="text" id="add-description" name="description" placeholder="Brief context or panel information..." 
@@ -202,9 +199,7 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- ==========================================
-     EDIT DEBATE MODAL
-     ========================================== -->
+
 <div id="edit-modal" class="fixed inset-0 w-full h-full bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="w-full max-w-xl glass-panel p-6 md:p-8 rounded-lg relative overflow-hidden spotlight-card">
         <div class="flex items-center justify-between mb-6 pb-2 border-b border-white/5">
@@ -221,14 +216,14 @@ require_once __DIR__ . '/layouts/header.php';
             <input type="hidden" name="id" id="edit-id">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Title -->
+                
                 <div class="flex flex-col">
                     <label for="edit-title" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Debate Title *</label>
                     <input type="text" id="edit-title" name="title" required 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Debate Type -->
+                
                 <div class="flex flex-col">
                     <label for="edit-type" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Format Type *</label>
                     <select id="edit-type" name="debate_type" required 
@@ -240,7 +235,7 @@ require_once __DIR__ . '/layouts/header.php';
                 </div>
             </div>
 
-            <!-- Motion -->
+            
             <div class="flex flex-col">
                 <label for="edit-motion" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Motion / Topic *</label>
                 <input type="text" id="edit-motion" name="motion" required 
@@ -248,7 +243,7 @@ require_once __DIR__ . '/layouts/header.php';
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <!-- Category -->
+                
                 <div class="flex flex-col">
                     <label for="edit-category" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Language *</label>
                     <select id="edit-category" name="category" required 
@@ -258,22 +253,21 @@ require_once __DIR__ . '/layouts/header.php';
                     </select>
                 </div>
 
-                <!-- Date -->
+                
                 <div class="flex flex-col">
                     <label for="edit-date" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Debate Date</label>
                     <input type="date" id="edit-date" name="debate_date" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Video URL / ID -->
                 <div class="flex flex-col">
-                    <label for="edit-video" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">YouTube Video ID / URL</label>
-                    <input type="text" id="edit-video" name="video_url" 
+                    <label for="edit-video" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">YouTube Video URL *</label>
+                    <input type="text" id="edit-video" name="video_url" required placeholder="e.g. https://www.youtube.com/watch?v=3v3gU0-dDkM" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
             </div>
 
-            <!-- Participants -->
+            
             <div class="flex flex-col">
                 <label for="edit-participants" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Key Participants / Teams</label>
                 <input type="text" id="edit-participants" name="participants" 
@@ -281,14 +275,14 @@ require_once __DIR__ . '/layouts/header.php';
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Outcome -->
+                
                 <div class="flex flex-col">
                     <label for="edit-outcome" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Outcome / Decision</label>
                     <input type="text" id="edit-outcome" name="outcome" 
                            class="px-3.5 py-2 bg-black/60 border border-white/10 rounded text-xs text-white focus:border-brandRed focus:outline-none transition-all">
                 </div>
 
-                <!-- Description -->
+                
                 <div class="flex flex-col">
                     <label for="edit-description" class="text-[10px] uppercase tracking-widest text-gray-400 mb-1.5 font-semibold">Additional Details</label>
                     <input type="text" id="edit-description" name="description" 
@@ -308,16 +302,14 @@ require_once __DIR__ . '/layouts/header.php';
     </div>
 </div>
 
-<!-- ==========================================
-     DELETE CONFIRMATION FORM (Hidden)
-     ========================================== -->
+
 <form action="<?= $base_path ?>/admin/debates/delete" method="POST" id="delete-form" class="hidden">
     <input type="hidden" name="csrf_token" value="<?= get_csrf_token() ?>">
     <input type="hidden" name="id" id="delete-id">
 </form>
 
 <script>
-    // Search logic
+    
     const searchInput = document.getElementById('debate-search');
     const tableRows = document.querySelectorAll('.debate-row');
 
@@ -336,7 +328,7 @@ require_once __DIR__ . '/layouts/header.php';
         });
     });
 
-    // Toggle Modal
+    
     function toggleModal(modalId) {
         const modal = document.getElementById(modalId);
         if (modal.classList.contains('opacity-0')) {
@@ -348,7 +340,7 @@ require_once __DIR__ . '/layouts/header.php';
         }
     }
 
-    // Open Edit Modal
+    
     function openEditModal(debate) {
         document.getElementById('edit-id').value = debate.id;
         document.getElementById('edit-title').value = debate.title || '';
@@ -364,7 +356,7 @@ require_once __DIR__ . '/layouts/header.php';
         toggleModal('edit-modal');
     }
 
-    // Delete Trigger
+    
     function confirmDelete(id, title) {
         if (confirm(`Are you sure you want to permanently delete the debate record '${title}'?`)) {
             document.getElementById('delete-id').value = id;
